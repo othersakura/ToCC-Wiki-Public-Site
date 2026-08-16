@@ -1,10 +1,13 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+#
+# 基於 Quartz 官方 ttrpg template（quartz/cli/templates/ttrpg.yaml）修改，
+# 加咗 zh-TW locale、opt-in publish 模式，同暫時停用 CNAME（未有自訂網域）。
 configuration:
   pageTitle: 眾城紀事
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
-  locale: en-US
+  locale: zh-TW
   baseUrl: othersakura.github.io/ToCC-Wiki-Public-Site
   ignorePatterns:
     - private
@@ -59,7 +62,17 @@ plugins:
   - source: "@quartz-community/obsidian-flavored-markdown"
     enabled: true
     options:
+      comments: true
+      highlight: true
+      wikilinks: true
+      callouts: true
+      mermaid: true
+      parseTags: true
+      parseArrows: true
+      parseBlockReferences: true
       enableInHtmlEmbed: false
+      enableYouTubeEmbed: true
+      enableVideoEmbed: true
       enableCheckbox: true
     order: 30
   - source: "@quartz-community/github-flavored-markdown"
@@ -88,7 +101,7 @@ plugins:
     enabled: false
     order: 85
   - source: "@quartz-community/hard-line-breaks"
-    enabled: false
+    enabled: true
     order: 90
   - source: "@quartz-community/ox-hugo"
     enabled: false
@@ -98,18 +111,39 @@ plugins:
     order: 92
   - source: "@quartz-community/quartz-fonts"
     enabled: true
+  # its-theme.ttrpg-dnd 呢個theme package喺呢個Quartz版本裝唔到（module解析錯誤），
+  # 暫時停用，改用上面 configuration.theme.colors 自訂色系；日後可以再試/換過主題
   - source: "@quartz-themes/core"
     enabled: false
     options:
-      theme: tokyo-night
+      theme: its-theme
+      variation: ttrpg-dnd
       mode: both
-  # 政策：opt-in 發布模式 —— 只有 frontmatter 明確標 publish: true 先會出現喺公開網站，
-  # 而非「除非標 draft/private 否則預設公開」。呢個係治理原則入面 Human control over
-  # privacy/publication 嘅具體落地，避免漏標而不小心外洩私隱內容。
+  # 政策：opt-in 發布模式（偏離官方 ttrpg template 預設）—— 只有 frontmatter 明確
+  # 標 publish: true 先會出現喺公開網站，而非「除非標 draft 否則預設公開」。呢個係
+  # 治理原則入面 Human control over privacy/publication 嘅具體落地，避免漏標而
+  # 不小心外洩私隱內容。
   - source: "@quartz-community/remove-draft"
     enabled: false
   - source: "@quartz-community/explicit-publish"
     enabled: true
+  - source: "@quartz-community/unlisted-pages"
+    enabled: true
+    options: {}
+    order: 45
+  - source: "@quartz-community/encrypted-pages"
+    enabled: true
+    options:
+      iterations: 600000
+      passwordField: password
+      unlistWhenEncrypted: false
+      outputPath: static/encryptedContentIndex.json
+  - source: "@quartz-community/stacked-pages"
+    enabled: false
+    layout:
+      position: afterBody
+      priority: 50
+      display: all
   - source: "@quartz-community/alias-redirects"
     enabled: true
   - source: "@quartz-community/content-index"
@@ -232,31 +266,25 @@ plugins:
         - aliases
       excludedProperties: []
       hidePropertiesView: false
-      delimiters: ---
+      delimiters: "---"
       language: yaml
     order: 5
     layout:
       position: beforeBody
       priority: 15
       display: all
-  - source: "@quartz-community/unlisted-pages"
-    enabled: true
-    options: {}
-    order: 45
-  - source: "@quartz-community/encrypted-pages"
+  # TTRPG 專用 plugin：互動式地圖（世界地圖）同 Excalidraw 手繪圖支援
+  - source: github:Requiae/quartz-leaflet-bases-plugin
     enabled: true
     options:
-      iterations: 600000
-      passwordField: password
-      unlistWhenEncrypted: false
-      outputPath: static/encryptedContentIndex.json
-    order: 900
-  - source: "@quartz-community/stacked-pages"
-    enabled: false
-    layout:
-      position: afterBody
-      priority: 50
-      display: all
+      enableCopyTool: false
+  - source: "@quartz-community/obsidian-plugin-excalidraw"
+    enabled: true
+    options:
+      enableInteraction: true
+      darkMode: auto
+      exportPadding: 20
+    order: 50
 layout:
   groups:
     toolbar:
