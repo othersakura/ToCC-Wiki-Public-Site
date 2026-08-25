@@ -3,7 +3,7 @@
 # 基於 Quartz 官方 ttrpg template（quartz/cli/templates/ttrpg.yaml）修改，
 # 加咗 zh-TW locale、opt-in publish 模式，同暫時停用 CNAME（未有自訂網域）。
 configuration:
-  pageTitle: 眾城紀事
+  pageTitle: 海城扎記
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
