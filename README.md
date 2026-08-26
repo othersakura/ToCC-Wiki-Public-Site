@@ -1,6 +1,6 @@
 # ToCC Wiki — Public Site
 
-呢個repo係「眾城紀事」（ToCC Wiki）嘅**發布層**，基於 [Quartz](https://quartz.jzhao.xyz) 靜態網站產生器，透過 GitHub Pages 對外發布。
+呢個repo係「海城扎記」（ToCC Wiki）嘅**發布層**，基於 [Quartz](https://quartz.jzhao.xyz) 靜態網站產生器，透過 GitHub Pages 對外發布。
 
 ## 呢個repo唔係咩
 
