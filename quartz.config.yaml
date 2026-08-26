@@ -21,10 +21,6 @@ configuration:
     - 世界設定/宗教/03_世界宗教
     - 世界設定/宗教/*.docx
     - 世界設定/宗教/*.pdf
-    # Wiki MD 入面 17 篇神祇頁面本身已經 publish:false（.md 唔會被 render），
-    # 但佢哋嘅肖像 jpg 唔受 publish 保護，所以要單獨擋；宗教內容日後開放公開
-    # 時記得連呢行一齊移除。
-    - 世界設定/宗教/Wiki MD/*.jpg
     - 世界設定/玩家須知
     - 時報原稿
   theme:
