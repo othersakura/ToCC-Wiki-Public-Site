@@ -225,7 +225,17 @@ a {
       padding: $topSpacing 2rem 2rem 2rem;
       display: flex;
       height: 100vh;
+      overflow-y: auto;
       position: sticky;
+
+      // Sidebar sections (graph/toc/backlinks) declare their own overflow
+      // handling, which makes flexbox treat their auto min-height as 0 and
+      // lets later sections (e.g. backlinks) get shrunk to 0px whenever the
+      // combined content is taller than one screen. Keep each section at
+      // its natural height and let the sidebar itself scroll instead.
+      & > * {
+        flex-shrink: 0;
+      }
     }
 
     & .sidebar.left {
