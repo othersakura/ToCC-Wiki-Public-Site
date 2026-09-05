@@ -16,13 +16,17 @@ configuration:
     # explicit-publish plugin 只過濾 .md 頁面，非 md 檔案（jpg/docx/pdf）唔理
     # publish 欄位、全部都會被 Assets emitter 複製入 public 輸出。呢幾個資料夾
     # 係未經審視嘅私隱/GM專用原始資料，用 ignorePatterns 呢層再擋一次。
-    - PC
+    # PC/ 已移除（2026-09-06）：PC 頁面正式開放，資料夾內淨係 PC/Public 嘅
+    # md 頁（各自帶 publish 欄位把關），冇未審視嘅原始檔，唔再需要成個資料夾擋。
     - 城鎮/TOCC 記錄用城市地點資料
     - 世界設定/宗教/03_世界宗教
     - 世界設定/宗教/*.docx
     - 世界設定/宗教/*.pdf
     - 世界設定/玩家須知
     - 時報原稿
+    # 後記嘅 DM Version md 有啲仲未 publish（例如 GO0294H），但源頭 docx
+    # 本身唔受 publish 欄位保護，會俾 Assets emitter 直接複製出去，要擋埋。
+    - 後記/**/*.docx
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
