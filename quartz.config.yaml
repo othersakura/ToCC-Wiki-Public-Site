@@ -24,6 +24,9 @@ configuration:
     - 世界設定/宗教/*.pdf
     - 世界設定/玩家須知
     - 時報原稿
+    # 後記嘅 DM Version md 有啲仲未 publish（例如 GO0294H），但源頭 docx
+    # 本身唔受 publish 欄位保護，會俾 Assets emitter 直接複製出去，要擋埋。
+    - 後記/**/*.docx
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
